@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            width: 100vw;
+            height: 80vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        span {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        input {
+            width: 280px;
+            height: 40px;
+            border-radius: 16px;
+            border-width: 2px;
+            padding-left: 20px;
+            font-size: 20px;
+            margin: 10px 0 30px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <span>防抖</span>
+    <input type="text">
+    <span>节流</span>
+    <input type="text">
+    <script>
+        // 防抖 Debounce ---------- 节流 Throttle
+
+        let oIpt1 = document.querySelectorAll('input')[0]
+        let oIpt2 = document.querySelectorAll('input')[1]
+
+        /********** 封装 **********/
+        // 防抖
+        function debounce(callback, delay) {
+            let timer = null
+            return function() {
+                if(timer) {
+                    clearTimeout(timer)
+                    timer = null
+                }
+                timer = setTimeout(() => {
+                    fn.call(this)
+                    clearTimeout(timer)
+                    timer = null
+                }, delay)
+            }
+        }
+        oIpt1.addEventListener('input', debounce(function() {
+            console.log(this.value)
+        }, 500))
+
+        // 节流
+        function throttle(fn, delay) {
+            let timer = null
+            return function() {
+                if(!timer) {
+                    fn.call(this)
+                    timer = setTimeout(() => {
+                        clearTimeout(timer)
+                        timer = null
+                    }, delay)
+                }
+            }
+        }
+        oIpt2.addEventListener('input', throttle(function() {
+            console.log(this.value)
+        }, 1000))
+
+
+
+        /********** 散装 **********/
+        // 防抖
+        // let timer = null
+        // oIpt1.oninput = function() {
+        //     if(timer !== null) {
+        //         clearTimeout(timer)
+        //         timer = null
+        //     }
+        //     timer = setTimeout(() => {
+        //         console.log(this.value)
+        //         clearTimeout(timer)
+        //         timer = null
+        //     }, 500)
+        // }
+
+        // 节流
+        // let timer = null
+        // oIpt2.oninput = function() {
+        //     if(timer === null) {
+        //         console.log(this.value)
+        //         timer = setTimeout(() => {
+        //             clearTimeout(timer)
+        //             timer = null
+        //         }, 1000)
+        //     }
+        // }
+    </script>
+</body>
+</html>
