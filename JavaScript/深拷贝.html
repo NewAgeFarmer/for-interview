@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // 深拷贝 deep clone
+    // 引用拷贝：只拷贝了对象的引用/地址，对所有拷贝的操作均为对同一个对象的操作
+        let arr1 = [1, 2, [3, 4, [5]]], arr2 = arr1
+        arr2[0] = 11111
+        // console.log(arr1, arr2, arr1===arr2)    // Obvious arr2 changes when arr1 change.
+
+        let obj1 = { prop1: 1, prop2: 2, prop3: { prop30: 3 } }, obj2 = obj1
+        obj2['prop1'] = 1000
+        // console.log(obj1, obj2, obj1===obj2)    // same result as the array group
+        
+    // 浅拷贝：根对象开辟了新的空间，但是两者子属性中仍有相同的引用，不彻底
+        let arr3 = arr1.slice(0)
+        arr1[1] = 222
+        arr1[2][0] = 33
+        // console.log(arr3, arr1===arr3)   // 引用已不同，但是对内部元素的引用仍指向同一处
+
+        let obj3 = {}
+        Object.assign(obj3, obj1)
+        obj1.prop1 = 101
+        obj1.prop3.prop30 = 303
+        console.log(obj3)
+        
+
+    </script>
+</body>
+</html>

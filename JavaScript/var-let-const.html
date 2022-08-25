@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // var let const 关键字
+        function fn1() {
+            var a = 1
+            return function() {
+                console.log('fn1.1', a) // undefined 被变量提升覆盖
+                var a = 11
+                console.log('fn1.2', a)
+            }
+        }
+        function fn2() {
+            let a = 2
+            return function() {
+                let a = 22
+                console.log('fn2.1', a)
+                console.log('fn2.2', a)
+            }
+        }
+        function fn3() {
+            let a = 3
+            return function() {
+                console.log('fn3.1', a)
+                var a = 33
+                console.log('fn3.2', a)
+            }
+        }
+        function fn4() {
+            var a = 4
+            return function() {
+                let a = 44
+                console.log('fn4.1', a)
+                console.log('fn4.2', a)
+            }
+        }
+        fn1()()
+        fn2()()
+        fn3()()
+        fn4()()
+    </script>
+</body>
+</html>
